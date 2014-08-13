@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Gratter</title>
+  <meta http-equiv='Content-Type' content='text/html; charset=utf-8' />
+  <style>
+    html,body,div,span,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,abbr,address,cite,code,del,em,img,q,samp,small,strong,var,b,i,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,caption,tbody,article,aside,canvas,details,figcaption,figure,footer,header,hgroup,menu,nav,section,summary,time,mark,audio,video{
+      margin: 0;
+      padding: 0;
+      border: 0;
+      outline: 0;
+      font-size: 100%;
+      vertical-align: baseline;
+      background: transparent;
+    }
+    * { 
+      -webkit-tap-highlight-color: rgba(0,0,0,0); 
+      -webkit-user-select: none; 
+      -webkit-touch-callout: none; 
+      -webkit-tap-highlight-color: transparent;
+    }
+    html, 
+    body {
+      width: 100%; 
+      height: 100%; 
+      background: rgba(0,0,0,.2);
+      line-height: 1;
+    }
+    #adContainer {
+      display: none;
+      position: relative; 
+      min-width: 670px;
+      max-width: 670px;
+      width: 980px; 
+      min-height: 980px;
+      max-height: 980px;
+      height: 980px; 
+      margin: 0 auto; 
+      padding: 0; 
+      overflow: hidden;
+    }
+    #container {
+      position: absolute; 
+      top: 0; 
+      left: 0; 
+      width: 100%; 
+      height: 100%; 
+      margin: 0; 
+      padding: 0;
+    }
+    #scratchArea {
+    	//position: absolute;
+    	left: 0;
+    	top: 0;
+    	opacity: 0;
+    }
+  	#container {
+  		background-image: url("assets/portrait-clean.jpg");
+  	}
+
+    .lrtext {
+      font-family: "LandRoverOT4-Bold";
+      position: absolute;
+      top: 56px;
+      left: 56px;
+      font-size: 18pt;
+      width: 363px;
+    }
+
+    #textline-1 {
+      font-size: 14pt;
+    }
+
+    #textline-1, #textline-2 {
+      text-transform: uppercase;
+    }
+
+    #textline-3, #textline-4, #textline-5 {
+      font-size: 12pt;
+      display: none;
+      margin-top: 10px;
+    }
+
+    #textline-4 {
+      background: url('assets/sprites.png') no-repeat;
+      background-position: -12px -75px;
+      height: 42px;
+      width: 100%;
+      padding-left: 52px;
+      margin-top: 20px;
+    }
+
+    #textline-5 {
+      background: url('assets/sprites.png') no-repeat;
+      background-position: 0px -120px;
+      height: 40px;
+      width: 100%;
+      margin-top: 20px;
+      z-index: 1000;
+      cursor: pointer;
+    }
+
+    #lrplayer {
+      display: none;
+    }
+
+    #lrvideobg {
+      position: absolute;
+      top: 220px;
+      left: 56px;
+      width: 560px;
+      height: 398px;
+      background: white;
+      opacity: 0.75;
+    }
+
+     #lrvideo {
+      position: absolute;
+      top: 262px;
+      left: 56px;
+    }
+
+  @font-face {
+  font-family: "LandRoverOT4-Bold";
+  src: url("font/LandRoverOT4-Bold.ttf") format("truetype"); }
+
+
+
+	</style>
+</head>
+<body>
+  <div id='adContainer'>
+    <div id='container'>
+      <div class="lrtext"><div id="textline-2">Clean off the car copy FPO Lorem ipsum dolor sit amet consectetur adipisicing</div></div>
+      <div id="lrplayer">
+      <div id="lrvideobg">
+      </div>
+      <video id="lrvideo" width="560" height="314" controls autoplay>
+              <source src="video/WASHDAY_070813.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+      </video>
+    </div>
+      <div id="scratchArea" data-backGroundImage="assets/portrait-clean.jpg" data-foreGroundImage="assets/portrait-dirty.jpg">
+      </div>
+    </div>
+  </div>
+
+
+<script src="assets/jquery-1.9.1.min.js"></script>
+<script src="assets/jquery.ScratchCard.js"></script>
+<script src="http://code.jquery.com/mobile/1.4.3/jquery.mobile-1.4.3.min.js"></script>
+<script>
+	var i = 0;
+  var vidplays = 0;
+  var video = document.getElementById('lrvideo');
+	$.fn.preload = function () {
+	  this.each(function () {
+	    $("<img/>")[0].src = this;
+	    i++;
+	    if(i == 2) {
+	    	$("#scratchArea").css("opacity", "1");
+	    }
+	  });
+	}
+	$(document).ready(function() {
+  
+    var swipecount = 0;
+    $('#adContainer').fadeIn('slow');
+		$(["assets/portrait-dirty.jpg", "assets/portrait-clean.jpg"]).preload();
+		$("#scratchArea").ScratchCard({
+			revealRadius: 40,
+			revealOnComplete: false,
+			updateOnMouseMove: false,
+			updateOnFingerMove: false,
+			onScratchComplete: function(percentScratched) {
+			},
+		});
+
+    $.event.special.swipe.horizontalDistanceThreshold = 10;
+    $.event.special.swipe.durationThreshold = 200;
+
+    jQuery( window ).on( "swipe", function( event ) { 
+      if (swipecount==2) loadVid();
+      if (swipecount==0) jQuery('.lrtext').fadeOut('fast', function(){jQuery(this).html("<div id='textline-1'>Range Rover Evoque</div><div id='textline-2'>Plus Qu'une Belle BÊte</div>").fadeIn('fast')});
+      swipecount++;
+      console.log(swipecount);
+     } )
+
+	});
+
+  function loadVid() {
+    vidplays++;
+    jQuery('#lrplayer').fadeIn('slow', function(){
+      video.play();
+    });
+  }
+
+
+
+    video.onended = function(e) {
+    jQuery('#lrplayer').fadeOut('slow', function(){
+    if (vidplays <= 1) { 
+      jQuery('.lrtext').append("<div id='textline-3'>Comme tous les véhicules Land Rover, le Range Rover Evoque 2013 optimise performances et capacités sous toutes les conditions, sur route come hors route. D'une allure compacte et audacieuse, c'est le Land Rover le plus efficace jamais construit.</div><div id='textline-4'>CTA<br>xx% Extra Copy</div><div id='textline-5' onclick='loadVid()'></div>");
+      jQuery('#textline-3, #textline-4, #textline-5').fadeIn();
+       jQuery('#scratchCanvas').fadeOut('slow');
+     }
+    });
+    };
+</script>
+</body>
+</html>
