@@ -1,0 +1,8 @@
+@font-face {
+    font-family: 'LandRoverOT4Bold';
+    src: url('landroverot4-bold.eot');
+    src: url('landroverot4-bold.eot') format('embedded-opentype'),
+         url('landroverot4-bold.woff') format('woff'),
+         url('landroverot4-bold.ttf') format('truetype'),
+         url('landroverot4-bold.svg#LandRoverOT4Bold') format('svg');
+}
