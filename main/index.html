@@ -10,7 +10,7 @@
 <body>
     <div id='adContainer'>
         <div class="lrtext">
-            <div id="textline-2">Clean off the car copy FPO Lorem ipsum dolor sit amet consectetur adipisicing</div>
+            <div id="textline-2">Clean off the car copy FPO <br>Lorem ipsum dolor sit amet <br> consectetur adipisicing</div>
         </div>
         <div id='container'>
             <div id="scratchArea-portrait" data-backGroundImage="images/portrait-clean.jpg" data-foreGroundImage="images/portrait-dirty.jpg">
@@ -20,9 +20,10 @@
         </div>
     </div>
     <div id="lrplayer">
+        <div id="lrvideoclose" onclick="lrclosevid();"></div>
         <div id="lrvideobg">
         </div>
-        <video id="lrvideo" width="560" height="314" controls autoplay>
+        <video id="lrvideo" controls autoplay>
             <source src="video/WASHDAY_070813.mp4" type="video/mp4">
                 <source src="video/WASHDAY_070813.ogv" type="video/ogg">
                     <source src="video/WASHDAY_070813.webm" type="video/webm">
@@ -32,6 +33,7 @@
 
     <script src="js/jquery-1.9.1.min.js"></script>
     <script src="js/jquery.ScratchCard.js"></script>
+    <script src="http://code.jquery.com/mobile/1.4.3/jquery.mobile-1.4.3.min.js"></script>
     <script src="js/lr.js"></script>
 
 </body>
