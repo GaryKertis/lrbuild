@@ -25,6 +25,8 @@
 
   jQuery(document).ready(function() {
 
+      $('#lrvideoclose').bind('tap', lrclosevid );
+
       jQuery(window).on("orientationchange", function(event) {
           if (event.orientation == "landscape") {
               video.width = 780;
@@ -86,7 +88,7 @@
 
   function lrclosevid() {
       video.pause();
-      video.currentTime = 0;
+      if (video.currentTime != 0) video.currentTime = 0;
       jQuery('#lrplayer').fadeOut();
       renderCopy();
   }
